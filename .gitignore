@@ -1,3 +1,7 @@
 *.log
-#user-manual/
+/user-manual/
 *-*.txt
+/src/style.css
+/Software_Requirement_Specification/
+/Software_Design_Document/
+/**/README.md
