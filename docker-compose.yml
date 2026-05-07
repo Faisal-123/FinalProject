@@ -10,6 +10,8 @@ services:
       - ./src:/app
     working_dir: /app
     command: npm start
+    depends_on:
+      - backend
 
   backend:
     image: node:18
@@ -20,9 +22,16 @@ services:
       - ./src:/app
     working_dir: /app
     command: node server.js
+    depends_on:
+      - database
 
   database:
     image: mongo
     container_name: eaglenav-db
     ports:
       - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
