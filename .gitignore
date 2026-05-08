@@ -1,6 +1,8 @@
 *.log
+*.out
 /docs/**/*.pdf
 /docs/**/*.aux
+/docs/**/*.toc
 *-*.txt
 /src/style.css
 /docs/Software_Requirement_Specification/SRS_v*.docx
