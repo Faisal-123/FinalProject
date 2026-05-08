@@ -1,4 +1,5 @@
 # EagleNav
+> *Please note: This repository does not serve as the actual repository for EagleNav. Rather, this is a mock repository for the final project as part of CS 3338-02 Spring '26*
 
 ## Project Overview
 EagleNav is a mobile app that helps users navigate the Cal State LA campus using augmented reality (AR). It shows directions with visual arrows and provides voice guidance.
