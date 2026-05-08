@@ -1,5 +1,6 @@
 *.log
-/docs/User_Manual
+/docs/**/*.pdf
+/docs/**/*.aux
 *-*.txt
 /src/style.css
 /docs/Software_Requirement_Specification/SRS_v*.docx
