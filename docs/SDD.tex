@@ -1,14 +1,16 @@
 \documentclass{article}
-\usepackage{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
+
 
 \title{Software Design Document (SDD) - EagleNav}
 \author{Group 5}
 \date{May 2026}
-\geometry{a4paper, margin=1in}
+
 
 \begin{document}
 \maketitle
+\clearpage
 
 \tableofcontents
 \newpage
@@ -28,21 +30,34 @@
 	\end{tabular}
 \end{table}
 
+\newpage
 \section{Introduction}
 \subsection{Purpose}
 This document describes the design of the EagleNav system.
+EagleNav is an augmented reality navigation platform. EagleNav aims to remove navigation barriers and create a more inclusive campus experience for all students 
+
 
 \subsection{Intended Audience}
-Students, developers, and instructors.
+This document is intended for students, developers, and instructors.
 
 \subsection{Overview}
-EagleNav is an AR-based campus navigation system.
+EagleNav provides indoor/outdoor campus navigation with accessibility-aware
+routing, campus events, and safety shortcuts. 
 
+\newpage
 \section{System Architecture}
 The system includes a mobile frontend, backend server, and database.
 
+\subsection{Workflow}
+
+\subsection{Site Breakdown}
+EagleNav's architecture is organized into three tiers: cloud infrastructure, on-device controllers, and on-device services. Each tier communicated downward interfaces
+
+\newpage
 \section{User Interface}
 Users interact through a mobile app with AR directions and voice guidance.
+
+\section{Database explanation}
 
 \section{Glossary}
 \begin{itemize}
