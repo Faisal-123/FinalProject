@@ -1,7 +1,13 @@
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
+\usepackage{fancyhdr}
 
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[L]{EagleNav}
+\fancyfoot[C]{Software Design Document}
+\fancyfoot[R]{\thepage}
 
 \title{Software Design Document (SDD) - EagleNav}
 \author{Group 5}
@@ -17,7 +23,6 @@
 
 \section{Version History}
 \begin{table}[h!]
-	\centering
 	\begin{tabular}{|c|c|}
 		\hline
 		\textbf{Snapshot} & \textbf{Date} \\
@@ -30,7 +35,6 @@
 	\end{tabular}
 \end{table}
 
-\newpage
 \section{Introduction}
 \subsection{Purpose}
 This document describes the design of the EagleNav system.
@@ -44,7 +48,6 @@ This document is intended for students, developers, and instructors.
 EagleNav provides indoor/outdoor campus navigation with accessibility-aware
 routing, campus events, and safety shortcuts. 
 
-\newpage
 \section{System Architecture}
 The system includes a mobile frontend, backend server, and database.
 
@@ -53,11 +56,17 @@ The system includes a mobile frontend, backend server, and database.
 \subsection{Site Breakdown}
 EagleNav's architecture is organized into three tiers: cloud infrastructure, on-device controllers, and on-device services. Each tier communicated downward interfaces
 
-\newpage
 \section{User Interface}
-Users interact through a mobile app with AR directions and voice guidance.
+Users interact through a mobile app with AR directions and voice guidance. The following list represents the primary pages that users will interact with:
+
+\begin{itemize}
+\item{\textbf{Home Screen:} Users will be able to access the navigation screen, settings, and get basic information at a glance.}
+\item{\textbf{Navigation Screen:} Users will be able to navigate the campus using AR + Map Navigation features.}
+\item{\textbf{Settings:} Users will be able to locally change the app's theme, navigation volume, AR settings, etc.}
+\end{itemize}
 
 \section{Database explanation}
+EagleNav uses MongoDB as its database.
 
 \section{Glossary}
 \begin{itemize}

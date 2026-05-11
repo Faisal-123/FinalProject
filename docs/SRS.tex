@@ -1,5 +1,13 @@
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[L]{EagleNav}
+\fancyfoot[C]{Software Requirements Specification}
+\fancyfoot[R]{\thepage}
 
 \title{Software Requirements Specification (SRS) - EagleNav}
 \author{Group 5}
@@ -14,7 +22,6 @@
 
 \section{Version History}
 \begin{table}[h!]
-	\centering
 	\begin{tabular}{|c|c|}
 		\hline
 		\textbf{Snapshot} & \textbf{Date} \\
@@ -27,7 +34,6 @@
 	\end{tabular}
 \end{table}
 
-\newpage
 \section{Introduction}
 \subsection{Purpose}
 This document explains the software requirements for the mobile application, EagleNav.
@@ -38,7 +44,6 @@ Developers and stakeholders.
 \subsection{Overview}
 EagleNav helps users navigate campus using AR.
 
-\newpage
 \section{External Interface Requirements}
 \subsection{User Interface}
 Mobile app with AR navigation and voice guidance.
@@ -46,7 +51,6 @@ Mobile app with AR navigation and voice guidance.
 \subsection{Software Interfaces}
 Backend server and database connection.
 
-\newpage
 \section{Legal and Ethical Considerations}
 User data must be handled securely and respectfully.
 
