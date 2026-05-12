@@ -29,8 +29,8 @@
 		\hline
 		Snapshot 1: Initial version & 5/7/2026 \\
 		Snapshot 2: Added features & 5/8/2026 \\
-		Snapshot 3: Updated system design & 5/9/2026 \\
-		Snapshot 4: Final version & 5/10/2026 \\
+		Snapshot 3: Updated system design & 5/12/2026 \\
+		Snapshot 4: Final version & 5/14/2026 \\
 		\hline
 	\end{tabular}
 \end{table}
@@ -48,14 +48,47 @@ This document is intended for students, developers, and instructors.
 EagleNav provides indoor/outdoor campus navigation with accessibility-aware
 routing, campus events, and safety shortcuts. 
 
+\newpage
 \section{System Architecture}
 The system includes a mobile frontend, backend server, and database.
 
+\subsection{Dependencies}
+The following dependencies are utilized:
+
+\subsubsection{Frontend}
+\begin{itemize}
+\item{ARCore / ARKit}
+\item{React Native}
+\end{itemize}
+
+\subsubsection{Backend}
+\begin{itemize}
+\item{Docker}
+\item{Express.js}
+\item{MongoDB}
+\item{Node.js}
+\end{itemize}
+
+
 \subsection{Workflow}
+Users will start on the homepage when the app launches. Then, users can either configure settings, or go to the main navigation page.
 
-\subsection{Site Breakdown}
-EagleNav's architecture is organized into three tiers: cloud infrastructure, on-device controllers, and on-device services. Each tier communicated downward interfaces
+\vspace{3pt}
+\hspace{-14pt}From the main navigation page, the primary workflow is described as follows:
 
+\begin{enumerate}
+\item{User selects a destination}
+\item{App processes the request}
+\item{The backend retrieves the request and returns directions}
+\item{The app receives the response and displays the directions to the user}
+\item{The user navigates towards the destination, with AR features helping to guide users throughout a navigation session}
+\end{enumerate}
+
+
+\subsection{Architecture Breakdown}
+EagleNav's architecture is organized into three tiers: cloud infrastructure, on-device controllers, and on-device services. Cloud infrastructure provides helps host the backend services for EagleNav, while the on-device controllers help to delegate communication between the backend and the frontend. On-device services helps assist in user navigation via AR support and GPS location data.
+
+\newpage
 \section{User Interface}
 Users interact through a mobile app with AR directions and voice guidance. The following list represents the primary pages that users will interact with:
 
@@ -65,9 +98,7 @@ Users interact through a mobile app with AR directions and voice guidance. The f
 \item{\textbf{Settings:} Users will be able to locally change the app's theme, navigation volume, AR settings, etc.}
 \end{itemize}
 
-\section{Database explanation}
-EagleNav uses MongoDB as its database.
-
+\newpage
 \section{Glossary}
 \begin{itemize}
 \item AR: Augmented Reality
