@@ -1,6 +1,6 @@
 *.log
 *.out
-/docs/**/*.pdf
+/docs/*.pdf
 /docs/**/*.aux
 /docs/**/*.toc
 *-*.txt
