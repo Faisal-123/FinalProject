@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[L]{EagleNav}
+\fancyfoot[C]{Software Requirements Specification}
+\fancyfoot[R]{\thepage}
+
+\title{Software Requirements Specification (SRS) - EagleNav}
+\author{Group 5}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+\clearpage
+
+\tableofcontents
+\newpage
+
+\section{Version History}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Snapshot} & \textbf{Date} \\
+		\hline
+		Snapshot 1: Initial version & 5/7/2026 \\
+		Snapshot 2: Added features & 5/8/2026 \\
+		Snapshot 3: Updated system design & 5/12/2026 \\
+		Snapshot 4: Final version & 5/14/2026 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Introduction}
+\subsection{Purpose}
+This document describes the software of the EagleNav system.
+EagleNav is an augmented reality navigation platform. EagleNav aims to remove navigation barriers and create a more inclusive campus experience for all students 
+
+\subsection{Intended Audience & Reading Suggestions}
+This document is intended for students, developers, and instructors involved in understanding or evaluating the requirements of the EagleNav system.
+\begin{itemize}
+	\item Students: Sections 2,3
+	\item Developers: Sections 2,3,4
+	\item Instructors: Sections 2,3,4
+\end{itemize}
+
+
+\subsection{Overview}
+EagleNav is a navigation application that combines AR-based guidance, routing services, and real-time location tracking to help users move efficiently across campus. The system integrates map data, sensor input, and accessibility-aware 
+routing to provide accurate and adaptive navigation support.
+
+
+\section{Interface Requirements}
+\subsection{User Interface}
+The EagleNav user interface is designed to be simple, accesible, and easy to use for all users. The main focus is on clarity,
+with minimal interaction, and support for all accesibility features.
+
+\begin{enumerate}
+	\item \textbf{Clean and Minimal Design}The app shall be easy to navigate
+	\item \textbf{Accesible Features}The app shall allow customizable font size and large touch targets. The UI shall be easy to interact with.
+	\item \textbf{Voice Prompt Integration} The app reduces the need for typing and provides hands-free navigation.
+	\item \textbf{Screen Reader Support} The app shall support readers to assist users with visual impairments.
+\end{enumerate}
+
+\subsection{Hardware Interfaces}
+Users will need a mobile device with GPS capabilities and internet access (whether celluar or otherwise). For AR capabilities, the mobile device will need to have a camera. For voice guidance, the mobile device will need to have microphones and speakers.
+The following lists out the recommended interfaces in addition to the required interfaces. Devices meeting these requirements helps lead to an ideal experience.
+\begin{itemize}
+\item{Microphone}
+\item{Speaker}
+\item{Camera}
+\item{ARCore / ARKit}
+\end{itemize}
+
+\subsubsection{Backend}
+\begin{itemize}
+\item{Network connection}
+\item{Docker (Note that the Docker images must be able to run/support the following):}
+\begin{itemize}
+	\item{Express.js}
+	\item{MongoDB}
+	\item{Node.js}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Sofwtare Interfaces}
+EagleNav integrates with external software systems and data sources.
+
+\begin{enumerate}
+	\item \textbf{Map Data}The system uses map data to generate routes and display navigation paths.
+	\item \textbf{Campus Information Sources} Campus websites and data feeds are used to retrieve data and updates.
+\end{enumerate}
+
+\subsection{Communication}
+Users will be able to contact the EagleNav team via email to report bugs, issues, or to submit general feedback. This communication will be handled in compliance with relevant data protection laws and regulations, including the ones set out in the CCPA.
+
+
+\section{Legal and Ethical Considerations}
+User data must be handled securely and respectfully. To that end, camera data is used solely for AR navigation purposes, and GPS data is only used to ensure proper navigation directions. Such data is never stored once processed.
+In addition, dictation data for voice navigation is processed on-device and never stored.
+EagleNav must address several legal and ethical considerations due to its reliance on location tracking and campus data.
+
+\begin{itemize}
+    \item \textbf{Location Privacy}: Continuous GPS tracking may raise privacy concerns. The system ensures tracking is only active during navigation sessions.
+    \item \textbf{Data Consent}: Users must agree to location access before navigation services are enabled.
+    \item \textbf{Data Usage}: The system uses publicly available campus and map data to ensure compliance with data usage regulations.
+    \item \textbf{Accessibility Fairness}: The system is designed to provide equal navigation access for users with disabilities through accessibility-aware routing.
+\end{itemize}
+
+\section{Glossary}
+\begin{table}[h!]
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Term} &\textbf{Definition}\\
+		\hline
+		AR & Augmented Reality \\
+		UI & User Interface \\
+		CCPA & California Consumer Privacy Act \\
+		LiDAR &Light Detection and Ranging \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\end{document}

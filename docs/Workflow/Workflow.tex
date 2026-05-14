@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+
+\title{Workflow - EagleNav}
+\author{Group 5}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+The workflow of EagleNav, a mobile appplication design to improve accessibility and navigation on campus, describes how the application processes
+user input, generates routes, provides instructions, and handles rerouting. The process begins when a user selects a destination using the application.
+A routing request is then generated and sent to the routing service to provide the optimal path. To improve navigation
+reliability, the workflow also includes route deviation detection and rerouting functionality. 
+
+\section{Workflow}
+
+\begin{enumerate}
+    \item The user selects a destination through the application interface. The Navigation Controller validates the destination input and sends a routing request to the Routing Controller, which communicates with the Valhalla Service to generate a route.
+    \item After the route is successfully generated, the Guidance Controller is activated. The controller returns the route geometry and turn-by-turn navigation instructions needed for active guidance.
+    \item The system continuously listens to updates from the Sensor Fusion and Map Matching modules in order to track the user’s current location accurately.
+    \begin{itemize}
+        \item If the user remains within the acceptable route tolerance, navigation guidance continues normally.
+        \item If the user moves outside the allowed deviation threshold, the system prepares to reroute.
+    \end{itemize}
+    \item When route deviation is detected multiple consecutive times, the Guidance Controller triggers the rerouting process through the Routing Controller. The current implementation uses an approximate 30-meter threshold before generating a new route.
+    \item During navigation, the controller continuously updates the user interface with navigation status messages such as:
+    \begin{itemize}
+        \item ``On Track''
+        \item ``Rerouting...''
+        \item ``Destination Reached''
+    \end{itemize}
+    \item Once navigation is completed or cancelled by the user, the Guidance Controller stops the active guidance session and releases navigation resources.
+\end{enumerate}
+
+\newpage
+\section{Workflow Diagram}
+
+\begin{figure}[h!]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{c}
+    
+    \fbox{User Selects Destination} \\
+    $\downarrow$ \\
+    \fbox{Navigation Controller Validates Input} \\
+    $\downarrow$ \\
+    \fbox{Routing Controller \newline Requests Route (Valhalla)} \\
+    $\downarrow$ \\
+    \fbox{Route Generated} \\
+    $\downarrow$ \\
+    \fbox{Guidance Controller Activated} \\
+    $\downarrow$ \\
+    \fbox{Sensor Fusion + Map Matching Updates} \\
+    $\downarrow$ \\
+    
+    \fbox{
+    \begin{tabular}{c}
+    On Route $\rightarrow$ Continue Guidance \\
+    Off Route $\rightarrow$ Trigger Reroute
+    \end{tabular}
+    } \\
+    
+    $\downarrow$ \\
+    \fbox{UI Updates (On Track / Rerouting / Arrived)} \\
+    $\downarrow$ \\
+    \fbox{Navigation Ends (Cancel / Arrival)} \\
+
+    \end{tabular}
+    }
+    \caption{Compact Navigation Workflow}
+\end{figure}
+\end{document}

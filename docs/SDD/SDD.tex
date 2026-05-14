@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{placeins}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[L]{EagleNav}
+\fancyfoot[C]{Software Design Document}
+\fancyfoot[R]{\thepage}
+
+\title{Software Design Document (SDD) - EagleNav}
+\author{Group 5}
+\date{May 2026}
+
+
+\begin{document}
+\maketitle
+\clearpag
+
+\tableofcontents
+\newpage
+
+\section{Version History}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Snapshot} & \textbf{Date} \\
+		\hline
+		Snapshot 1: Initial version & 5/7/2026 \\
+		Snapshot 2: Added features & 5/8/2026 \\
+		Snapshot 3: Updated system design & 5/12/2026 \\
+		Snapshot 4: Final version & 5/14/2026 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\section{Introduction}
+\subsection{Purpose}
+This document describes the software design of the EagleNav system.
+EagleNav is an augmented reality navigation platform. EagleNav aims to remove navigation barriers and create a more inclusive campus experience for all students.
+
+
+\subsection{Intended Audience & Reading Suggestions}
+This document is intended for students, developers, and instructors.
+\begin{itemize}
+	\item Students: sections 2,4 
+	\item Developers: section 3,4 
+	\item Instructors: sections 2,3,4
+\end{itemize}
+
+\subsection{Overview}
+EagleNav is a campus navigation system design to provide routing with a focus on accesibility, 
+safety, and real-time awareness. The platform integrates multiple data sources including campus map data, routing engines, sensor inputs, and external services. 
+The components work together to generate navigation instructs that adapt to user movement.
+
+
+\section{System Architecture}
+The system includes a mobile frontend, backend server, and database. It is layered into cloud infrstructure, on-device controllers, and on-device services.
+
+\subsection{Architecture Breakdown}
+The system is divided into the following major layers: 
+
+\subsection{Cloud infrastructure Layer}
+The cloud layer is reponsible for storing map data and generating routes.
+
+\begin{itemize}
+	\item Campus map data is stored in Cloudflare R2
+	\item The Valhalla routing engine computes possible routes.
+	\item Updating map data requires uploading a new file and restarting routing service.
+\end{itemize}
+
+\subsubsection{Client Controller Layer}
+The client layer runs on the user's device and manages navigation experience.
+\begin{itemize}
+	\item \textbf{Location Controller}: Handles GPS input
+	\item \textbf{Routing Controller}: Requests routes ffrom cloud service
+	\item \textbf{Guidance Controller}: Manages navigation
+	\item \textbf{Navigation Voice Controller}: Handles spoken instructions
+	\item \textbf{UI Navigation Controller}: Controls navigation states: idle, navigating, and arrived
+\end{itemize}
+
+\subsection{Service Layer}
+The service layer provides reusable system functions.
+
+\begin{itemize}
+	\item \textbf{Location Service}: Provides GPS updates
+	\item \textbf{Valhalla Service}: Sends routing requests and processes responses
+	\item \textbf{Compass Service}: Suplies heading informaiton
+	\item \textbf{Text-To-Speech Service}: Generates spoken instructions
+	\item \textbf{Haptic Feedback Service}: Provides vibration cues for navigation
+\end{itemize}
+
+\subsection{Workflow}
+\begin{enumerate}
+	\item The user selects a destination in the application
+	\item The Routing Controller sends a request to Valhalla
+	\item The cloud service returns a route
+	\item The Guidance Controller begins navigation
+	\item The Location Controller updates the user position
+	\item If user deviates from route, The Routing Controller triggers a reroute
+	\item Updated routes are recieved
+	\item The system ends navigation when user arrives/cancels
+\end{enumerate}
+
+\subsection{Workflow Diagram}
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c}
+    
+    \fbox{User Selects Destination} \\
+    $\downarrow$ \\
+    \fbox{Navigation Controller Validates Input} \\
+    $\downarrow$ \\
+    \fbox{Routing Controller \newline Requests Route (Valhalla)} \\
+    $\downarrow$ \\
+    \fbox{Route Generated} \\
+    $\downarrow$ \\
+    \fbox{Guidance Controller Activated} \\
+    $\downarrow$ \\
+    \fbox{Sensor Fusion + Map Matching Updates} \\
+    $\downarrow$ \\
+    
+    \fbox{
+    \begin{tabular}{c}
+    On Route $\rightarrow$ Continue Guidance \\
+    Off Route $\rightarrow$ Trigger Reroute
+    \end{tabular}
+    } \\
+    
+    $\downarrow$ \\
+    \fbox{UI Updates (On Track / Rerouting / Arrived)} \\
+    $\downarrow$ \\
+    \fbox{Navigation Ends (Cancel / Arrival)} \\
+
+    \end{tabular}
+    }
+    \caption{Compact Navigation Workflow}
+	\end{figure}
+	\floatbarrier
+
+\section{User Interface}
+Users interact through a mobile app with AR directions and voice guidance. The following list represents the primary pages that users will interact with:
+
+\begin{itemize}
+\item \textbf{Home Screen:} Users will be able to access the navigation screen, settings, and get basic information at a glance.
+\item \textbf{Navigation Screen:} Users will be able to navigate the campus using AR + Map Navigation features.
+\item \textbf{Events Screen:} Allows users to view and save campus events.
+\item \textbf{Settings:} Users will be able to locally change the app's theme, navigation volume, AR settings, etc.
+\end{itemize}
+
+\subsection{Screen Components}
+\begin{itemize}
+	\item \textbf{HomeMap Screen:} Provides a search bar, map view, and menu.
+	\item \textbf{Guidance Screen}: Includes a turnbanner, progess bar of navigation, and an end/cancel option.
+\end{itemize}
+
+\subsection{User Interface Flow Diagram}
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c}
+
+\fbox{HomeMap Screen} \\
+$\downarrow$ \\
+\fbox{Search / Select Destination} \\
+$\downarrow$ \\
+\fbox{Route Preview Screen} \\
+$\downarrow$ \\
+\fbox{Start Navigation} \\
+$\downarrow$ \\
+\fbox{Guidance Screen (Turn-by-Turn Navigation)} \\
+$\downarrow$ \\
+\fbox{
+\begin{tabular}{c}
+On Route $\rightarrow$ Continue Navigation \\
+Off Route $\rightarrow$ Recalculate Route
+\end{tabular}
+} \\
+$\downarrow$ \\
+\fbox{Arrival Screen (Destination Reached)} \\
+$\downarrow$ \\
+\fbox{End Navigation}
+
+\end{tabular}
+}
+\caption{User Interface Flow of EagleNav}
+\end{figure}
+\floatbarrier
+
+
+\section{Glossary}
+\begin{table}[h!]
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Term} &\textbf{Definition}\\
+		\hline
+		AR & Augmented Reality \\
+		UI & User Interface \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+
+\section{References}
+\begin{itemize}
+\item{\href{https://ascent.cysun.org/project/project/view/248}{Ascent - Project (https://ascent.cysun.org/project/project/view/248)}}
+\end{itemize}
+
+\end{document}
