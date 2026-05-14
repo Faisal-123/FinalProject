@@ -4,6 +4,7 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage{placeins}
+\usepackage{graphicx}
 
 \pagestyle{fancy}
 \fancyhead{}
@@ -45,7 +46,7 @@ This document describes the software design of the EagleNav system.
 EagleNav is an augmented reality navigation platform. EagleNav aims to remove navigation barriers and create a more inclusive campus experience for all students.
 
 
-\subsection{Intended Audience & Reading Suggestions}
+\subsection{Intended Audience \& Reading Suggestions}
 This document is intended for students, developers, and instructors.
 \begin{itemize}
 	\item Students: sections 2,4 
@@ -143,7 +144,7 @@ The service layer provides reusable system functions.
     }
     \caption{Compact Navigation Workflow}
 	\end{figure}
-	\floatbarrier
+	\FloatBarrier
 
 \section{User Interface}
 Users interact through a mobile app with AR directions and voice guidance. The following list represents the primary pages that users will interact with:
@@ -193,7 +194,7 @@ $\downarrow$ \\
 }
 \caption{User Interface Flow of EagleNav}
 \end{figure}
-\floatbarrier
+\FloatBarrier
 
 
 \section{Glossary}
